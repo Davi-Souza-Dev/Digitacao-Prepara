@@ -84,7 +84,6 @@ class Alvo {
     this.X = Math.floor(Math.random() * (larguraContainer - this.tam));
     this.Y = Math.floor(Math.random() * (alturaContainer - this.tam));
     this.letra = letras[Math.floor(Math.random() * 26)];
-    console.log(this.letra);
     this.id = Date.now() + "_" + Math.floor(Math.random() * 10000);
     this.box = container;
     this.valor = 10;
@@ -119,39 +118,46 @@ class Alvo {
   };
 }
 
-// //Classe alvo bonus
-// class AlvoBonus {
-//   constructor(container) {
-//     //Definindo propriedades básicas
-//     this.tam = Math.floor(Math.random() * 150) + 50;
-//     this.X = Math.floor(Math.random() * (larguraContainer - this.tam));
-//     this.Y = Math.floor(Math.random() * (alturaContainer - this.tam));
-//     this.id = Date.now() + "_" + Math.floor(Math.random() * 10000);
-//     this.box = container;
-//     this.valor = 100;
-//     //Criando o objeto ao instanciar
-//     this.desenhar();
-//     this.me = document.getElementById(`${this.id}`);
-//     //Remover após 3 segundos.
-//     let sumir = setInterval(() => {
-//       this.remove();
-//     }, 3000);
-//   }
+//Classe alvo bonus
+class AlvoBonus {
+  constructor(container) {
+    //Definindo propriedades básicas
+    this.tam = Math.floor(Math.random() * 150) + 50;
+    this.X = Math.floor(Math.random() * (larguraContainer - this.tam));
+    this.Y = Math.floor(Math.random() * (alturaContainer - this.tam));
+    this.id = Date.now() + "_" + Math.floor(Math.random() * 10000);
+    this.letra = letras[Math.floor(Math.random() * 26)];
+    this.box = container;
+    this.valor = 100;
+    //Criando o objeto ao instanciar
+    this.desenhar();
+    this.me = document.getElementById(`${this.id}`);
+    //Remover após 3 segundos.
+    let sumir = setInterval(() => {
+      this.remove();
+    }, 1000);
+  }
 
-//   desenhar = () => {
-//     const div = document.createElement("div");
-//     div.setAttribute("class", "alvoBonus");
-//     div.setAttribute("id", this.id);
-//     div.setAttribute(
-//       "style",
-//       `top:${this.Y}px;left:${this.X}px;width:${this.tam}px;height:${this.tam}px`
-//     );
-//     this.box.appendChild(div);
-//   };
-//   remove = () => {
-//     this.me.remove();
-//   };
-// }
+  desenhar = () => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "alvoBonus");
+    div.setAttribute("id", this.id);
+    div.setAttribute(
+      "style",
+      `top:${this.Y}px;left:${this.X}px;width:${this.tam}px;height:${this.tam}px`
+    );
+
+    const letra = document.createElement('p');
+    letra.setAttribute("class","letra");
+    letra.innerHTML = this.letra;
+    div.appendChild(letra);
+
+    this.box.appendChild(div);
+  };
+  remove = () => {
+    this.me.remove();
+  };
+}
 
 //Classe do alvoErro
 // class AlvoErro {
@@ -228,7 +234,8 @@ criarAlvos = () => {
       var key = evt.keyCode;
       let letra = String.fromCharCode(key);
       if(letra == alvo.letra){
-        
+        bonus++;
+        console.log(bonus)
         som.play();
         // criarPts("+",alvo.valor,alvo.X,alvo.Y);
         score += alvo.valor;
@@ -251,19 +258,19 @@ criarAlvos = () => {
     //   clearInterval(timer);
     // });
   }
-  // if(bonus == 10){
-  //   bonus = 0;
-  //   const alvo = new AlvoBonus(container);
-  //   const alvoContainer = document.getElementById(alvo.id);
-  //   alvoContainer.addEventListener("click", (evt) => {
-  //     som.play();
-  //     criarPts(alvo.valor,alvo.X,alvo.Y);
-  //     score += alvo.valor;
-  //     alvo.remove();
-  //   });
-  //   som.pause();
-  //   som.currentTime = 0;
-  // }
+  if(bonus == 10){
+    bonus = 0;
+    const alvo = new AlvoBonus(container);
+    const alvoContainer = document.getElementById(alvo.id);
+    alvoContainer.addEventListener("click", (evt) => {
+      som.play();
+      // criarPts(alvo.valor,alvo.X,alvo.Y);
+      score += alvo.valor;
+      alvo.remove();
+    });
+    som.pause();
+    som.currentTime = 0;
+  }
 };
 
 btnReset.addEventListener("click", (evt) => {
@@ -287,6 +294,7 @@ btnMedio.addEventListener("click", (evt) => {
   dificuldade = 5;
   iniciar(velo,infinito);
 });
+
 btnDificil.addEventListener("click", (evt) => {
   minutos = 0;
   segundos = 30;

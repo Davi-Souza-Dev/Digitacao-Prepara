@@ -113,12 +113,21 @@ p{
     animation: girar 1s infinite linear ;
 }
 .alvoBonus{
-    background: url(imagens/alvoBonus.png);
+    background: url(imagens/alvoBonus.svg);
     background-position: center center;
     background-size: cover;
     transform-origin: center center;
     position: absolute;
     animation: girar 1s infinite linear ;
+    fill: yellow;
+}
+
+.alvoBonus > p{
+  color: yellow;
+}
+
+.alvoBonus svg path{
+  fill: yellow;
 }
 .pts{
   font-size: 3rem;
