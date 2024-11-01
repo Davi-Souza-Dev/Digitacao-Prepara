@@ -3,34 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="shortcut icon" href="imagens/logoPrepara.png" type="image/x-icon">
     <title>Tiro ao alvo</title>
   </head>
   <body>
-    <!-- <div id="hexGrid" >
-        <div class="light" id="luz"></div>
-        <div class="grid"></div>
-      </div> -->
-      <!-- <script src="script/background.js"></script> -->
     <div class="popup" id="menu" style="display: flex">
-      <h1>Bem vindo</h1>
+      <img src="imagens/logoPrepara.png" alt="logo prepara">
+      <h1>Prepara Teclas</h1>
       <p>Escolha a dificuldade</p>
       <button id="btnFacil"><span>FÁCIL</span><i></i></button>
       <button id="btnMedio"><span>MÉDIO</span><i></i></button>
       <button id="btnDificil"><span>DÍFICIL</span><i></i></button>
-      <button id="btnInfinito"><span>INFÍNITO</span><i></i></button>
+      <!-- <button id="btnInfinito"><span>INFÍNITO</span><i></i></button> -->
     </div>
     <div class="popup" id="dialog">
       <p>Fim de jogo</p>
       <p id="score">Pontuação: 0000</p>
       <button id="btnReset"><span>RESETAR</span><i></i></button>
     </div>
-    <div class="timer">
-      <p id="time">00:00</p>
-    </div>
     <div class="container" id="container">
     </div>
-    <audio src="musica.mp3" id="audio"></audio>
-    <script src="script/script.js"></script>
+    </div>
+    <div class="containerVida" id="containerVida">
+      <img src="imagens/vida.svg" alt="vida">
+      <p class="ptsVida" id="ptsVida">0</p>
+    </div>
+    <script src="script/script.js" type="module"></script>
   </body>
 </html>
